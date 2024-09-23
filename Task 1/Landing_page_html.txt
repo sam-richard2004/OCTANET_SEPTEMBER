@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <title>OCTANET</title>
+      <link rel="stylesheet" href="style.css">
+</head>
+<body style="background-color: black;"> 
+    <nav>
+        <div class="nav__logo"><a href="#">Travel.io</a></div>
+        <ul class="nav__links">
+        <li class="link">Home</li>
+        <li class="link">Features</li>
+        <li class="link">About us</li>
+        <li class="link">Contact us</li>
+    </ul>
+    <div class="search_box">
+        <label>🔍</label>
+        <input type="text" placeholder="Search">
+    </div>  
+  </nav>
+    <div class="container">
+        <img src="HelloVacay on Twitter.jpeg" alt="image2" width="100%">
+        <div class="text-block">
+            <p>Ready to explore the beauty of wonderful world</p>
+            <p class="one"><b>A place where nature and adventure unite</b></p>
+           
+        </div>
+           
+    </div>
+    
+    <div class="container1">
+        <img src="Are You Seeking Information About Photography_ Then Check Out These Great Tips!.jpeg" alt="">
+    </div>
+    <div class="container2">
+        <img src="WhatsApp Image 2024-09-15 at 7.28.39 PM.jpeg" alt="">
+        <p>"Travel far enough, you meet yourself"</p>
+    </div>
+    <hr>
+    <div class="container3">
+        <img src="Patricia Lake Glory Canvas Wall Art by Sergio Lanza _ iCanvas.jpeg" alt="">
+        <p> We travel, initially, to lose ourselves; and we travel, next to find ourselves. We travel to open our hearts and eyes and learn more about the world than our newspapers will accommodate. We travel to bring what little we can, in our ignorance and knowledge, to those parts of the globe whose riches are differently dispersed. And we travel, in essence, to become young fools again- to slow time down and get taken in, and fall in love once more.</p>
+    </div>
+    <hr>
+    <center>
+        <h2 style="color: white;">Contact</h2>
+        <h4 style="color: white;">+91 787483783743 | Travel.io@gmail.com</h4>
+    <h4 style="color: white;">9th street Avenue Park, Trichy, 625620</h4>
+    </center>
+    
+
+</div>
+</body>
+</html>
