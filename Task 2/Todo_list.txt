@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To-Do List</title>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url("Página\ em\ branco\ do\ bloco\ de\ notas\ no\ diário\ de\ bala\ na\ área\ de\ trabalho\ de\ escritório\ rosa\ brilhante_\ Vista\ superior\ da\ mesa\ brilhante\ moderna\ com\ notebook\ _\ Foto\ Premium.jpeg")
+    
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background: transparent;
+        backdrop-filter: blur(40px);
+        border-radius: 8px;
+        border: 3px solid rgba(26, 24, 24, 0.418);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .box {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 20px;
+        background-color: #7ab2b9;
+        
+    }
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+    .task-list {
+        list-style-type: none;
+        padding: 0;
+    }
+    .task {
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: #fff;
+    }
+    .task.high {
+        background-color: #f89b9bea; /* Red for high priority */
+    }
+    .task.medium {
+        background-color: #f5f58ff6; /* Yellow for medium priority */
+    }
+    .task.low {
+        background-color: #a4fca4ec; /* Green for low priority */
+    }
+    .task-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 5px;
+    }
+    .task-title {
+        font-size: 18px;
+    }
+    .task-actions {
+        display: flex;
+        gap: 10px;
+    }
+    .task-actions button {
+        padding: 5px 10px;
+        border: none;
+        background-color: #9399a1d7;
+        color: #fff;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .task-actions button:hover {
+        background-color: #9399a1d7;
+    }
+    form {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+    form input[type="text"],
+    form input[type="time"],
+    form select,
+    form input[type="date"] {
+        flex: 1;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    form button {
+        padding: 5px 10px;
+        border: none;
+        background-color: #54e776;
+        color: #fff;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    form button:hover {
+        background-color: #e0e778;
+    }
+    #delete-all-tasks{
+    background-color: #54e776;  /* Red background */
+    color: white;               /* White text */
+    border: none;               /* Remove default border */
+    padding: 10px 20px;         /* Add some padding */
+    font-size: 14px;            /* Increase font size */
+    border-radius: 5px;         /* Rounded corners */
+    cursor: pointer;            /* Change cursor to pointer on hover */
+    }
+    #delete-all-tasks:hover{
+        background-color: #e0e778;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="box">
+        <h1>To-Do List</h1>
+        <form id="task-form">
+            <input type="text" id="task-input" placeholder="Enter task...">
+            <div style="display: flex; flex-direction: column;">
+                <label for="priority-select">Priority:</label>
+                <select id="priority-select">
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+            </div>
+            <input type="date" id="due-date">
+            <input type="time" id="due-time">
+            <button type="submit">Add Task</button>
+        </form>
+        <ul class="task-list" id="task-list">
+            <!-- Tasks will be added here dynamically -->
+        </ul>
+        <button id="delete-all-tasks">Delete All Tasks</button>
+    </div>
+</div>
+<script>
+    document.getElementById('task-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var taskInput = document.getElementById('task-input').value.trim();
+        var prioritySelect = document.getElementById('priority-select').value;
+        var dueDate = document.getElementById('due-date').value;
+        var dueTime = document.getElementById('due-time').value;
+        var dateTime = dueDate + ' ' + dueTime; // Concatenating date and time
+        if (taskInput !== '') {
+            addTask(taskInput, prioritySelect, dateTime);
+            document.getElementById('task-input').value = '';
+            document.getElementById('due-date').value = '';
+            document.getElementById('due-time').value = '';
+        }
+    });
+
+    function addTask(taskText, priority, dateTime) {
+    var taskList = document.getElementById('task-list');
+    var li = document.createElement('li');
+    li.className = 'task ' + priority;
+    li.innerHTML = `
+    <div class="task-header">
+        <div class="task-title">→ ${taskText}</div>
+        <div class="task-actions">
+            <button class="delete-task"><i class="fas fa-trash-alt"></i> Delete</button>
+        </div>
+    </div>
+    <div class="task-details">
+        <div><strong>Priority:</strong> ${priority}</div>
+        <div><strong>Due Date & Time:</strong> ${formatDateTime(dateTime)}</div>
+    </div>
+    `;
+    taskList.appendChild(li);
+    bindDeleteButton(li);
+}
+
+    function bindDeleteButton(taskElement) {
+        var deleteButton = taskElement.querySelector('.delete-task');
+        deleteButton.addEventListener('click', function() {
+            taskElement.remove();
+        });
+    }
+
+    document.getElementById('delete-all-tasks').addEventListener('click', function() {
+        var taskList = document.getElementById('task-list');
+        while (taskList.firstChild) {
+            taskList.removeChild(taskList.firstChild);
+        }
+    });
+
+    function formatDateTime(dateTime) {
+    var date = new Date(dateTime);
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var amOrPm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // Handle midnight
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    var day = date.getDate();
+    var month = date.getMonth() + 1; // Month is zero-based
+    var year = date.getFullYear();
+    return `${day}/${month}/${year} ${hours}:${minutes} ${amOrPm}`;
+}
+</script>
+</body>
+</html>
